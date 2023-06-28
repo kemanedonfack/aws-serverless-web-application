@@ -20,7 +20,7 @@ Before diving into building a serverless web application with AWS services, it i
 
 ## STEP 1: Configure AWS S3, CloudFront, and WAF
 
-### Create S3 Bucket
+### Setting up an AWS S3 bucket for hosting the web application
 After logging in to the AWS Management Console and navigating to the Amazon S3 service, you will find the option to create a new S3 bucket. Clicking on **Create Bucket** will initiate the process of setting up your bucket for hosting the web application.
 ![1](./images/1.png)
 
