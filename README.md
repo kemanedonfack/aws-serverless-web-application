@@ -35,4 +35,57 @@ Choose the files from your local machine that make up your web application. Afte
 ![6](./images/6.png)
 
 
+### Setting up AWS WAF rules and conditions
+On the AWS Management Console and navigate to the AWS WAF service
+![waf](./images/7.png)
+Click on create web ACL
+![waf](./images/8.png)
+Provide a name for your web ACL and select ressource type in our case **Amazon cloudFront distributions**. Then click on **Next**
+In the section **Add rules and rule groups** 
+![rules](./images/9.png) 
+click on Add rules then select Add managed rule groups
+![rules](./images/10.png) 
+In the next window, expand "AWS Managed rule groups" and scroll down to **Free rule groups**. Add a few rules to protect your application.
+
+![rules](./images/11.png) 
+Scroll down and click on "Add rules."
+Ensure that requests not matching any rules are Allowed. To do this, select "Allow" under the "Default action" section.
+![rules](./images/12.png) 
+Click on "Next" until you reach the end, leaving the default settings as they are. Finally, review your configurations and click on "Create web ACL."
+Our web ACL has been created 
+![rules](./images/13.png) 
+
+### Setting up CloudFront distribution for the S3 bucket
+
+On the AWS Management Console and navigate to the AWS CloudFront service
+![cloudFront](./images/14.png) 
+Click on "Create Distribution" to create a CloudFront distribution.
+In the Create Distribution interface, click on the "Origin Domain" field and select the previously created S3 bucket.
+![cloudFront](./images/15.png) 
+
+Under "Origin Access," select "Origin access control setting."
+
+![cloudFront](./images/16.png) 
+Then, click on "Create control setting Identity" and leave all the settings at their default values. Click on "Create" to proceed.
+![cloudFront](./images/17.png) 
+
+At viewer protocol policy
+Apply the same settings as shown in the screenshot below.
+![cloudFront](./images/18.png) 
+In the next section, apply the following configurations, and then select the previously created web ACL
+![cloudFront](./images/19.png) 
+In the "Default Root Object" section, enter the name of your main HTML file, in our case, "index.html."
+![cloudFront](./images/23.png) 
+Then, click on "Create." After the new distribution is created, click on "Copy Policy."
+
+![cloudFront](./images/20.png) 
+This policy will grant CloudFront access to our S3 bucket. To do this, go back to the S3 service and select the bucket containing our website. Then, go to "Permissions."
+
+![cloudFront](./images/21.png) 
+In the "Bucket Policy" section, click on "Edit," delete the existing content, paste the copied policy, and click on "Save Changes."
+![cloudFront](./images/22.png) 
+
+![cloudFront](./images/24.png) 
+Wait a few minutes for your distribution to deploy, then copy the domain name and paste it into your browser.
+![cloudFront](./images/25.png) 
 
