@@ -22,6 +22,12 @@ Before diving into building a serverless web application with AWS services, it i
 
 ## **STEP 1: Configure AWS S3, CloudFront, and WAF**
 
+### What's AWS S3
+
+[**AWS S3**](https://aws.amazon.com/s3/) (Simple Storage Service) is a highly scalable and durable cloud storage service provided by Amazon Web Services. It allows you to store and retrieve large amounts of data, such as files, images, videos, and backups, in a secure and cost-effective manner.
+
+With AWS S3, you can create buckets, which act as containers for storing your data. Each bucket has a globally unique name, and you can choose the region where you want to host your data. S3 provides strong data consistency and durability, ensuring that your files are accessible and protected against data loss.
+
 ### Setting up an AWS S3 bucket for hosting the web application
 
 To begin, log in to the AWS Management Console and navigate to the `Amazon S3` service. From there, you can create a new S3 bucket by clicking on **Create Bucket**.
@@ -42,8 +48,13 @@ Select the files from your local machine that make up your web application, and 
 
 ![6](./images/6.png)
 
+### What's AWS WAF
 
-### Setting up AWS WAF rules and conditions
+[AWS WAF](https://aws.amazon.com/waf/) (Web Application Firewall) is a cloud-based firewall service that helps protect your web applications from common web exploits and attacks. It allows you to define and enforce rules to control access to your web application and filter out malicious traffic.
+
+When setting up AWS WAF, you create a Web ACL (Access Control List), which acts as a container for the rules and conditions that define how your application should handle incoming requests. These rules and conditions help identify and block potential threats, such as SQL injection attacks, cross-site scripting (XSS) attacks, and more.
+
+### Setting up AWS WAF rules
 
 Navigate to the **AWS WAF service** in the AWS Management Console.
 
@@ -77,7 +88,14 @@ Click on `Next` until you reach the end, leaving the default settings as they ar
 
 ![rules](./images/13.png) 
 
+### What's CloudFront
+
+[**CloudFront**](https://aws.amazon.com/cloudfront/) is a content delivery network (CDN) service provided by Amazon Web Services (AWS). It enables the efficient distribution of your content, including web pages, images, videos, and other static or dynamic files, to end users across the globe.
+
+CloudFront works by caching your content in edge locations, which are distributed globally. When a user requests content, CloudFront delivers it from the edge location that is geographically closest to the user, reducing latency and improving the overall performance of your application.
+
 ### Setting up CloudFront distribution for the S3 bucket
+
 Navigate to the **AWS CloudFront service** in the AWS Management Console.
 
 ![cloudFront](./images/14.png) 
@@ -124,6 +142,12 @@ Wait a few minutes for your distribution to deploy, then copy the domain name an
 
 ## STEP 2: Configure DynamoDB and Lambda Functions
 
+### What's Amazon DynamoDB 
+
+[**Amazon DynamoDB**](https://aws.amazon.com/dynamodb/) is a fully managed **NoSQL database** service provided by Amazon Web Services (AWS). It is designed to deliver seamless and scalable performance for applications that require low-latency, consistent, and highly available data storage.
+
+DynamoDB is a key-value store that allows you to store and retrieve any amount of data with single-digit millisecond latency. It offers automatic scaling to handle the throughput needs of your application, ensuring that your database can handle high traffic and unpredictable workloads without any manual intervention. This scalability makes DynamoDB suitable for a wide range of use cases, from small-scale applications to large-scale enterprise solutions.
+
 ### Creating an AWS DynamoDB table for data storage
 
 Navigate to the DynamoDB service
@@ -161,6 +185,12 @@ Enter the role name, verify the chosen policy, and click on **Create role.**
 
 ![Role](./images/33.png) 
 
+### What's AWS Lambda
+
+[**AWS Lambda**](https://aws.amazon.com/lambda/) is a **serverless** compute service provided by Amazon Web Services (AWS). It allows you to run your code without provisioning or managing servers, making it an ideal choice for building scalable and cost-effective applications.
+
+With AWS Lambda, you can focus on writing your application logic in the form of functions, known as Lambda functions. These functions are triggered by various events, such as changes to data in an Amazon S3 bucket, updates to a DynamoDB table, or incoming HTTP requests through API Gateway. Lambda automatically scales your functions in response to the incoming workload, ensuring that your application can handle any amount of traffic without the need for manual intervention.
+
 ### Create Lambda Functions 
 
 Navigate to the Lambda service and clic on **create a function**
@@ -193,6 +223,12 @@ Repeat the same steps to create the other functions. For example, create a funct
 **Remember to deploy your functions after creating them.**
 
 ## STEP 3: Implementing API Gateway
+
+### What's AWS API Gateway
+
+[**AWS API Gateway**](https://aws.amazon.com/api-gateway/) is a fully managed service that allows you to create, publish, and manage APIs for your applications. It acts as a front door, enabling you to expose your application's functionality as secure and scalable APIs that can be accessed by clients such as web browsers, mobile devices, or other services.
+
+With API Gateway, you can easily build RESTful APIs that integrate with other AWS services or external systems. It provides a range of features to streamline the API development and management process. These include request and response transformations, authentication and authorization mechanisms, traffic management, monitoring, and logging capabilities.
 
 Navigate to the **API Gateway service**
 
