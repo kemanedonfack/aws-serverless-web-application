@@ -89,3 +89,103 @@ In the "Bucket Policy" section, click on "Edit," delete the existing content, pa
 Wait a few minutes for your distribution to deploy, then copy the domain name and paste it into your browser.
 ![cloudFront](./images/25.png) 
 
+## STEP 2: Configure DynamoDB and Lambda Functions
+
+### Creating an AWS DynamoDB table for data storage
+Navigate to the DynamoDB service
+
+![dynamoDB](./images/26.png) 
+Then, click on "Create table." 
+
+![dynamoDB](./images/27.png) 
+Provide a name for your table and specify the partition key value. Leave all other parameters at their default settings.
+
+Your table has been successfully created.
+![dynamoDB](./images/28.png) 
+
+### Configuring IAM roles and permissions for Lambda functions
+Navigate to the IAM service
+![Role](./images/29.png) 
+
+In the left sidebar of the IAM service, click on "Roles." In the new interface, click on "Create role." 
+![Role](./images/30.png) 
+
+In the new interface, select the Lambda service and click on "Next."
+![Role](./images/31.png) 
+
+In the search results, find the DynamoDB permissions, select the "AmazonDynamoDBFullAccess" policy, and click on "Next." 
+![Role](./images/32.png) 
+
+In the new interface, enter the role name, verify the policy selection, and click on "Create role."
+![Role](./images/33.png) 
+
+### Create Lambda Functions 
+
+Navigate to the Lambda service and clic on create a function
+![Lambda](./images/34.png) 
+
+Enter the function name and select "Python 3.9" as the runtime.
+![Lambda](./images/35.png) 
+
+In the permissions section, select "Use an existing role" and choose the previously created role. Then, click on "Create function."
+![Lambda](./images/36.png) 
+
+After creating the function, in the new window, scroll down and select the "Code" tab. Enter your code in this section and then click on "Deploy."
+![Lambda](./images/37.png) 
+
+Our Lambda function has been successfully created.
+![Lambda](./images/38.png) 
+
+Repeat the same steps to create the other functions.
+Function: getEmployees
+![Lambda](./images/39.png) 
+
+Remember to deploy your functions after creating them.
+
+## STEP 3: Implementing API Gateway
+
+Navigate to the API Gateway service
+
+![apigateway](./images/40.png)
+
+Scroll down to the "REST API" section and click on "Build."
+
+![apigateway](./images/41.png)
+
+Select "New API" and provide the required information. Then, click on "Create API."
+
+![apigateway](./images/42.png)
+
+In the new window, click on "Action" and then "Create Method."
+
+![apigateway](./images/43.png)
+
+Let's start by creating a method to retrieve employees saved in our DynamoDB table. Select the GET method, enter the name of the previously created Lambda function, and click on "Save."
+![apigateway](./images/44.png)
+
+For the insertEmployee function, create a method of type POST. 
+![apigateway](./images/45.png)
+
+With our methods ready, let's deploy our API. Click on "Action," then "Deploy API." In the popup window, select "New stage" and enter the stage name. Then, deploy.
+![apigateway](./images/46.png)
+
+![apigateway](./images/47.png)
+
+Our API has been successfully deployed. Go back to the Resources tab, click on "Action," and then "Enable CORS."
+Since our API Gateway will interact with CloudFront, and these two services are not in the same domain, we have enabled CORS to avoid CORS origin errors. Redeploy your API.
+
+![apigateway](./images/48.png)
+
+Now, copy the address of your API. 
+![apigateway](./images/49.png)
+
+Go to the source code of your application, specifically the scripts.js file. Modify the API_ENDPOINT variable and enter the address of your API.
+![apigateway](./images/50.png)
+
+## STEP 4: Testing the Application
+
+go to CloudFront service and copy the url and paste it in your browser
+
+![apigateway](./images/51.png)
+
+![apigateway](./images/52.png)
