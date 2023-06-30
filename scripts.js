@@ -1,6 +1,11 @@
 //add your api here below
 var API_ENDPOINT = "https://yl7ealf6a8.execute-api.eu-north-1.amazonaws.com/v1"
-//AJAX GET REQUEST
+
+$(document).ready(function() {
+  // Call the function to retrieve employees
+  getEmployees();
+});
+//AJAX POST REQUEST
 document.getElementById("createEmployeeForm").onsubmit = function(event) {
   event.preventDefault(); // Pour empêcher le formulaire de se soumettre normalement
   var inputData = {
@@ -19,6 +24,9 @@ document.getElementById("createEmployeeForm").onsubmit = function(event) {
     success: function(response) {
       $('#createEmployeeForm')[0].reset();
       alert("success");
+
+      // Call the function to retrieve employees
+      getEmployees();
     },
     error: function() {
       alert("error");
@@ -26,8 +34,33 @@ document.getElementById("createEmployeeForm").onsubmit = function(event) {
   });
 };
 
+//AJAX DELETE REQUEST
+function deleteEmployee(employeeId) {
+  var requestBody = {
+    "employeeId": employeeId.toString()
+  };
+  $.ajax({
+    url: API_ENDPOINT,
+    type: 'DELETE',
+    data: JSON.stringify(requestBody),
+    contentType: 'application/json; charset=utf-8',
+    success: function(response) {
+      alert("Employee deleted successfully");
+      // Call the function to retrieve employees
+      getEmployees();
+    },
+    error: function() {
+      alert("Error deleting employee");
+    }
+  });
+}
+
 //AJAX GET REQUEST
 document.getElementById("getEmployees").onclick = function() {
+  getEmployees();
+};
+
+function getEmployees() {
   $.ajax({
     url: API_ENDPOINT,
     type: 'GET',
@@ -42,7 +75,7 @@ document.getElementById("getEmployees").onclick = function() {
           <td>" + data['address'] + "</td>\
           <td>" + data['phone'] + "</td>\
           <td>\
-            <a href='#deleteEmployeeModal' class='delete' data-toggle='modal'><i class='material-icons' data-toggle='tooltip' title='Delete'>&#xE872;</i></a>\
+            <a href='#' class='delete' data-toggle='modal' onclick='deleteEmployee(" + data['employeeId'] + ")'><i class='material-icons' data-toggle='tooltip' title='Delete'>&#xE872;</i></a>\
           </td>\
         </tr>";
         $("#EmployeesTable").append(row);
@@ -52,4 +85,4 @@ document.getElementById("getEmployees").onclick = function() {
       alert("error");
     }
   });
-};
+}
