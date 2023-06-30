@@ -17,6 +17,8 @@ Before diving into building a serverless web application with AWS services, it i
 
 - **AWS Account**: Create an AWS account to access and utilize the AWS services mentioned in this article.
 - **AWS IAM**: Understand the basics of AWS Identity and Access Management (IAM) for managing user permissions and roles within the AWS environment.
+- **Knowledge of AWS Lambda**: Familiarize yourself with AWS Lambda, as it will be used to write the serverless functions for this application.
+- **Understanding of REST APIs**: Have a basic understanding of REST (Representational State Transfer) APIs and their fundamental principles, including the HTTP methods such as GET, POST, and DELETE, which will be used to interact with the API Gateway.
 
 ## STEP 1: Configure AWS S3, CloudFront, and WAF
 
