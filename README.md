@@ -189,3 +189,9 @@ go to CloudFront service and copy the url and paste it in your browser
 ![apigateway](./images/51.png)
 
 ![apigateway](./images/52.png)
+
+## Conclusion
+
+In this article, we explored the process of building a serverless web application using AWS services. We began by configuring AWS S3 for hosting the application, leveraging CloudFront for content delivery, and implementing AWS WAF for security against SQL injections. Next, we set up DynamoDB as our data storage solution and configured Lambda functions to retrieve and store data. Additionally, we implemented API Gateway to expose our Lambda functions as RESTful API endpoints. Finally, we tested the application's functionality, including API endpoints and data retrieval/storage.
+
+By harnessing the power of serverless architecture and AWS services, we achieved a scalable, secure, and efficient web application deployment. The combination of S3, CloudFront, DynamoDB, Lambda, and API Gateway provided a robust infrastructure for our serverless web application, enabling seamless integration and optimal performance. With these tools and techniques, you can build and deploy your own serverless web applications with confidence, leveraging the benefits of cloud computing and focusing on delivering exceptional user experiences.
