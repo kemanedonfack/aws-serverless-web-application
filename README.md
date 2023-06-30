@@ -24,11 +24,11 @@ Before diving into building a serverless web application with AWS services, it i
 
 ### Setting up an AWS S3 bucket for hosting the web application
 
-After logging in to the AWS Management Console and navigating to the `Amazon S3` service, you will find the option to create a new S3 bucket. Clicking on **Create Bucket** will initiate the process of setting up your bucket for hosting the web application.
+To begin, log in to the AWS Management Console and navigate to the `Amazon S3` service. From there, you can create a new S3 bucket by clicking on **Create Bucket**.
 
 ![1](./images/1.png)
 
-You will be prompted to provide a unique name for your bucket. It's important to choose a name that is globally unique within the entire `AWS S3 namespace`. This ensures that there are no naming conflicts with existing buckets. Select the region where you want to host your web application.
+Pprovide a unique name for your bucket. It's important to choose a name that is globally unique within the entire `AWS S3 namespace`. This ensures that there are no naming conflicts with existing buckets. Select the region where you want to host your web application.
 
 ![2](./images/2.png)
 
@@ -38,23 +38,24 @@ Once the bucket is created, you can proceed to upload your web application files
 
 ![4](./images/4.png)
 
-Choose the files from your local machine that make up your web application. After having add your files go down and click on upload button 
+Select the files from your local machine that make up your web application, and click on `Upload` to add them to your bucket.
+
 ![6](./images/6.png)
 
 
 ### Setting up AWS WAF rules and conditions
 
-On the AWS Management Console and navigate to the AWS WAF service
+Navigate to the **AWS WAF service** in the AWS Management Console.
 
 ![waf](./images/7.png)
 
-Click on **Create web ACL**
+Click on  **Create web ACL** to create a new web Access Control List (ACL).
 
 ![waf](./images/8.png)
 
-Provide a name for your web ACL and select ressource type in our case **Amazon cloudFront distributions**. Then click on **Next**.
+Provide a name for your web ACL and select ressource type in our case **Amazon cloudFront distributions**. Then click on **Next**
 
-In the section **Add rules and rule groups** 
+In the **Add rules and rule groups** section, click on Add rules, and then select Add managed rule groups.
 
 ![rules](./images/9.png) 
 
@@ -68,23 +69,20 @@ In the next window, expand **AWS Managed rule groups** and scroll down to **Free
 
 Scroll down and click on **Add rules**.
 
-Ensure that requests not matching any rules are Allowed. To do this, select **Allow** under the **Default action** section.
+To ensure that requests not matching any rules are allowed, select **Allow** under the **Default action** section.
 
 ![rules](./images/12.png) 
 
-Click on `Next` until you reach the end, leaving the default settings as they are. Finally, review your configurations and click on **Create web ACL.**
-Our web ACL has been created 
+Click on `Next` until you reach the end, leaving the default settings as they are. Finally, review your configurations and click on**Create web ACL.** Your web ACL has been created.
 
 ![rules](./images/13.png) 
 
 ### Setting up CloudFront distribution for the S3 bucket
-
-On the AWS Management Console and navigate to the **AWS CloudFront service**
+Navigate to the **AWS CloudFront service** in the AWS Management Console.
 
 ![cloudFront](./images/14.png) 
 
-Click on **Create Distribution** to create a CloudFront distribution.
-In the Create Distribution interface, click on the `Origin Domain` field and select the previously created S3 bucket.
+Click on **Create Distribution** to create a new CloudFront distribution. In the Create Distribution interface, click on the `Origin Domain` field and select the previously created S3 bucket.
 
 ![cloudFront](./images/15.png) 
 
@@ -92,15 +90,14 @@ Under **Origin Access,** select `Origin access control setting`
 
 ![cloudFront](./images/16.png) 
 
-Then, click on **Create control setting Identity** and leave all the settings at their default values. Click on **Create** to proceed.
+Click on **Create control setting Identity**, leaving all settings at their default values, and then click on **Create**.
 
 ![cloudFront](./images/17.png) 
 
-At viewer protocol policy
-Apply the same settings as shown in the screenshot below.
+For the **viewer protocol policy,** apply the same settings as shown in the screenshot below.
 
 ![cloudFront](./images/18.png) 
-In the next section, apply the following configurations, and then select the previously `created web ACL`
+In the next section, apply the following configurations and select the previously `created web ACL`
 
 ![cloudFront](./images/19.png) 
 
@@ -108,11 +105,10 @@ In the **Default Root Object** section, enter the name of your main HTML file, i
 
 ![cloudFront](./images/23.png) 
 
-Then, click on "Create." After the new distribution is created, click on "Copy Policy."
+Click on **Create.** After the new distribution is created, click on **Copy Policy.**
 
 ![cloudFront](./images/20.png) 
-
-This policy will grant **CloudFront access to our S3 bucket**. To do this, go back to the S3 service and select the bucket containing our website. Then, go to **Permissions**.
+This policy will grant **CloudFront access to our S3 bucket**. To apply it, go back to the S3 service, select the bucket containing your website, and go to **Permissions**.
 
 ![cloudFront](./images/21.png) 
 
@@ -129,99 +125,128 @@ Wait a few minutes for your distribution to deploy, then copy the domain name an
 ## STEP 2: Configure DynamoDB and Lambda Functions
 
 ### Creating an AWS DynamoDB table for data storage
+
 Navigate to the DynamoDB service
 
 ![dynamoDB](./images/26.png) 
-Then, click on "Create table." 
+
+Then, click on **Create table.** 
 
 ![dynamoDB](./images/27.png) 
-Provide a name for your table and specify the partition key value. Leave all other parameters at their default settings.
 
-Your table has been successfully created.
+Provide a name for your table and specify the **partition key** value. Leave all other parameters at their default settings.
+
+**Your table has been successfully created.**
+
 ![dynamoDB](./images/28.png) 
 
 ### Configuring IAM roles and permissions for Lambda functions
 Navigate to the IAM service
+
 ![Role](./images/29.png) 
 
-In the left sidebar of the IAM service, click on "Roles." In the new interface, click on "Create role." 
+In the left sidebar of the IAM service, click on **Roles.** In the new interface, click on **Create role.** 
+
 ![Role](./images/30.png) 
 
-In the new interface, select the Lambda service and click on "Next."
+Select the Lambda service and click on **Next.**
+
 ![Role](./images/31.png) 
 
-In the search results, find the DynamoDB permissions, select the "AmazonDynamoDBFullAccess" policy, and click on "Next." 
+In the search results, find the DynamoDB permissions, select the **AmazonDynamoDBFullAccess** policy, and click on **Next.** 
+
 ![Role](./images/32.png) 
 
-In the new interface, enter the role name, verify the policy selection, and click on "Create role."
+Enter the role name, verify the chosen policy, and click on **Create role.**
+
 ![Role](./images/33.png) 
 
 ### Create Lambda Functions 
 
-Navigate to the Lambda service and clic on create a function
+Navigate to the Lambda service and clic on **create a function**
+
 ![Lambda](./images/34.png) 
 
-Enter the function name and select "Python 3.9" as the runtime.
+Enter the function name and select **Python 3.9** as the `runtime`.
+
 ![Lambda](./images/35.png) 
 
-In the permissions section, select "Use an existing role" and choose the previously created role. Then, click on "Create function."
+In the permissions section, select `Use an existing role` and choose the previously created role. Then, click on **Create function.**
+
 ![Lambda](./images/36.png) 
 
-After creating the function, in the new window, scroll down and select the "Code" tab. Enter your code in this section and then click on "Deploy."
+After creating the function, scroll down to the **Code** tab. Enter your code in this section and click on **Deploy**.  
+
 ![Lambda](./images/37.png) 
 
-Our Lambda function has been successfully created.
+**Our Lambda function has been successfully created.**
+
 ![Lambda](./images/38.png) 
 
-Repeat the same steps to create the other functions.
-Function: getEmployees
+Repeat the same steps to create the other functions. For example, create a function named **getEmployees**.
+
 ![Lambda](./images/39.png) 
 
-Remember to deploy your functions after creating them.
+**deleteEmployee Function**
+![Lambda](./images/53.png) 
+
+**Remember to deploy your functions after creating them.**
 
 ## STEP 3: Implementing API Gateway
 
-Navigate to the API Gateway service
+Navigate to the **API Gateway service**
 
 ![apigateway](./images/40.png)
 
-Scroll down to the "REST API" section and click on "Build."
+Scroll down to the **REST API** section and click on **Build.**
 
 ![apigateway](./images/41.png)
 
-Select "New API" and provide the required information. Then, click on "Create API."
+Select **New API** and provide the required information. Then, click on **Create API.**
 
 ![apigateway](./images/42.png)
 
-In the new window, click on "Action" and then "Create Method."
+In the new window, click on **Action** and then **Create Method.**
 
 ![apigateway](./images/43.png)
 
-Let's start by creating a method to retrieve employees saved in our DynamoDB table. Select the GET method, enter the name of the previously created Lambda function, and click on "Save."
+Let's start by creating a method to retrieve employees saved in our `DynamoDB table`. Select the `GET method`, enter the name of the previously created Lambda function, and click on **Save.**
+
 ![apigateway](./images/44.png)
 
-For the insertEmployee function, create a method of type POST. 
+For the **insertEmployee** function, create a method of type `POST`. 
+
 ![apigateway](./images/45.png)
 
-With our methods ready, let's deploy our API. Click on "Action," then "Deploy API." In the popup window, select "New stage" and enter the stage name. Then, deploy.
+For the **deleteEmployee** function, create a method of type `DELETE`. 
+
+With our methods ready, let's deploy our API. Click on `Action,` then **Deploy API.** In the popup window, select **New stage** and enter the stage name. Then, deploy.
+
 ![apigateway](./images/46.png)
 
 ![apigateway](./images/47.png)
 
-Our API has been successfully deployed. Go back to the Resources tab, click on "Action," and then "Enable CORS."
-Since our API Gateway will interact with CloudFront, and these two services are not in the same domain, we have enabled CORS to avoid CORS origin errors. Redeploy your API.
+After successfully deploying our API in the API Gateway, we need to configure **CORS (Cross-Origin Resource Sharing)** to ensure proper communication between the API Gateway and CloudFront. CORS is necessary because these two services reside in different domains.
+
+Go back to the `Resources tab`, click on `Action,` and then **Enable CORS.**
+
+Enabling `CORS` allows the **API Gateway** to handle requests from different origins, such as **CloudFront**. This step is crucial to prevent `CORS origin errors`, which occur when a web application hosted on one domain (CloudFront) tries to access resources from another domain (API Gateway) without proper CORS configuration.
+
+**After enabling CORS, make sure to redeploy your API to apply the changes.**
 
 ![apigateway](./images/48.png)
 
 Now, copy the address of your API. 
+
 ![apigateway](./images/49.png)
 
-Go to the source code of your application, specifically the scripts.js file. Modify the API_ENDPOINT variable and enter the address of your API.
+Go to the source code of your application, specifically the `scripts.js` file. Modify the `API_ENDPOINT` variable and enter the address of your API.
+
 ![apigateway](./images/50.png)
 
 ## STEP 4: Testing the Application
 
-go to CloudFront service and copy the url and paste it in your browser
+Go to CloudFront service and copy the url and paste it in your browser
 
 ![apigateway](./images/51.png)
 
@@ -229,6 +254,6 @@ go to CloudFront service and copy the url and paste it in your browser
 
 ## Conclusion
 
-In this article, we explored the process of building a serverless web application using AWS services. We began by configuring AWS S3 for hosting the application, leveraging CloudFront for content delivery, and implementing AWS WAF for security against SQL injections. Next, we set up DynamoDB as our data storage solution and configured Lambda functions to retrieve and store data. Additionally, we implemented API Gateway to expose our Lambda functions as RESTful API endpoints. Finally, we tested the application's functionality, including API endpoints and data retrieval/storage.
+In conclusion, this article outlined the process of building a serverless web application using AWS services. We configured AWS S3 for hosting, utilized CloudFront for content delivery, and implemented AWS WAF for security. DynamoDB and Lambda functions handled data storage and retrieval, while API Gateway exposed our functions as RESTful API endpoints.
 
-By harnessing the power of serverless architecture and AWS services, we achieved a scalable, secure, and efficient web application deployment. The combination of S3, CloudFront, DynamoDB, Lambda, and API Gateway provided a robust infrastructure for our serverless web application, enabling seamless integration and optimal performance. With these tools and techniques, you can build and deploy your own serverless web applications with confidence, leveraging the benefits of cloud computing and focusing on delivering exceptional user experiences.
+With these tools, we achieved a scalable, secure, and efficient deployment. By leveraging serverless architecture and AWS services, you can build your own serverless web applications, delivering exceptional user experiences in the cloud.
