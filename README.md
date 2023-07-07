@@ -47,7 +47,7 @@ Provide a unique **name** for your bucket. It's required to choose a name that i
 
 Then click on `Create bucket`.
 
-Once the bucket is created, you can proceed to upload your web application files. Click on your bucket and select the **Upload** option then **Add files**. You'll find the application files [**here**](https://github.com/numerica-ideas/community/tree/master/aws/building-a-serverless-web-application/web)
+Once the bucket is created, you can proceed to upload your web application files. Click on your bucket and select the **Upload** option then **Add files**. You'll find the application files [**here**](web/)
 
 ![4](./images/4.png)
 
@@ -167,7 +167,7 @@ Let's note that for production usages, you should apply the **Least Privilege Pr
 
 ### Create Lambda Functions
 Navigate in the `AWS Management Console > AWS Lambda`, Click on **create a function**.
-You will find the code for each function [**here**](https://github.com/numerica-ideas/community/tree/master/aws/building-a-serverless-web-application/functions)
+You will find the code for each function [**here**](functions/)
 
 For the unction name, enter **insertEmployee** and select **Python 3.9** as the `runtime`.
 
@@ -254,17 +254,8 @@ Navigate in the `AWS Console Management > CloudFront`, on your CloudFront Distri
 ![apigateway](./images/52.png)
 
 ## Resources
-To facilitate the practical implementation of the concepts discussed in this article, we have provided a [GitHub repository](https://github.com/numerica-ideas/community/tree/master/aws/building-a-serverless-web-application) containing all the necessary files to build your serverless web application using AWS services.
-
-———————
-
-We have just started our journey to build a network of professionals to grow even more our free knowledge-sharing community that’ll give you a chance to learn interesting things about topics like cloud computing, software development, and software architectures while keeping the door open to more opportunities.
-
-Does this speak to you? If **YES**, feel free to [Join our Discord Server](https://discord.numericaideas.com) to stay in touch with the community and be part of independently organized events.
-
-———————
+To facilitate the practical implementation of the concepts discussed in this article, we have provided a [GitHub repository]() containing all the necessary files to build your serverless web application using AWS services.
 
 ## Conclusion
 In conclusion, this article provided a detailed guide on building a scalable and secured serverless web application using AWS services. We successfully configured AWS S3 for efficient hosting, leveraged CloudFront CDN for optimized content delivery, and implemented AWS WAF to ensure robust security measures. Additionally, the dynamic duo of DynamoDB and Lambda functions seamlessly managed data storage and retrieval, while API Gateway served as a front gate for RESTful API endpoints. By leveraging serverless architecture and AWS services, you can build your own serverless web applications, delivering exceptional user experiences in the cloud.
 
-Thanks for reading this article, recommend and share if you enjoyed it. Follow us on [Facebook](https://www.facebook.com/numericaideas), [Twitter](https://twitter.com/numericaideas), and [LinkedIn](https://www.linkedin.com/company/numericaideas) for more content.
